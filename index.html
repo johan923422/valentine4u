@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Valentine ❤️</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    text-align:center;
+    font-family:Arial, sans-serif;
+    color:white;
+    overflow:hidden;
+    background:linear-gradient(-45deg,#8B0000,#ff1a1a,#b30000,#ff4d6d);
+    background-size:400% 400%;
+    animation:gradient 8s ease infinite;
+}
+
+@keyframes gradient{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    margin-top:60px;
+}
+
+img{
+    width:260px;
+    border-radius:20px;
+    margin:20px 0;
+    box-shadow:0 0 25px pink;
+}
+
+button{
+    padding:15px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:12px;
+    margin:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#yesBtn{
+    background:#ff4d6d;
+    color:white;
+}
+
+#noBtn{
+    background:black;
+    color:white;
+    position:absolute;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+.heart{
+    position:fixed;
+    top:-10px;
+    font-size:20px;
+    animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Will You Be My Valentine? ❤️</h1>
+    <h2 id="name"></h2>
+
+    <img src="yourphoto.jpg">
+
+    <p>
+    မောင့်ရဲ့အချစ်ရဆုံးမိန်းမရေ<br>
+    မောင့်valentineလေးအဖြစ်<br>
+    မောင့်နားမှာအမြဲရှိနေပေးနိုင်မလား
+    </p>
+
+    <button id="yesBtn" onclick="yesClick()">Yes ❤️</button>
+    <button id="noBtn" onmouseover="moveButton()">No 😢</button>
+</div>
+
+<audio id="bgMusic" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+// Name
+let personName = prompt("Enter your name:");
+document.getElementById("name").innerText = personName;
+
+// Music Fix
+let music = document.getElementById("bgMusic");
+document.body.addEventListener("click", function(){
+    music.play();
+}, { once: true });
+
+// Yes Click Fireworks
+function yesClick(){
+    music.play();
+    document.body.innerHTML =
+    "<h1 style='margin-top:100px;font-size:20px;'>အခုလိုရွေးချယ်လိုက်လို့မိန်းမမမှားစေရပါဘူးအရင်ကထက်မိန်းမကိုပိုချစ်ပိုဂရုစိုက်ပေးပါ့မယ်နော်</h1>";
+    startFireworks();
+}
+
+// No Escape
+function moveButton(){
+    let x = Math.random()*(window.innerWidth-100);
+    let y = Math.random()*(window.innerHeight-50);
+    let btn = document.getElementById("noBtn");
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+// Heart Rain
+function createHeart(){
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(Math.random()*3+2)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>{heart.remove();},5000);
+}
+setInterval(createHeart,300);
+
+</script>
+
+</body>
+</html>
